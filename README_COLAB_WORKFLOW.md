@@ -11,12 +11,13 @@ This setup allows you to develop locally in VS Code while training on Google Col
 ## 📁 Project Structure
 
 ```
-F5-TTS-official/
-├── F5-TTS/                    # Main F5-TTS repository
-│   ├── src/f5_tts/           # Source code (develop here)
-│   ├── configs/              # Training configurations
-│   ├── data/                 # Local data samples (for testing)
-│   └── ckpts/                # Downloaded models
+colab-fine-tuning/              # Your repository (becomes F5-TTS in Colab)
+├── src/f5_tts/                # Source code (develop here)
+├── configs/                   # Training configurations
+├── data/vietnamese_char/      # Your Vietnamese dataset
+│   ├── wavs/                 # Audio files
+│   └── sample.csv            # Metadata file
+├── ckpts/                    # Downloaded models
 ├── notebooks/
 │   └── colab_training.ipynb  # Colab training notebook
 └── README_COLAB_WORKFLOW.md  # This guide
@@ -28,8 +29,8 @@ F5-TTS-official/
 
 1. **Clone and setup your repository:**
    ```bash
-   git clone https://github.com/SWivid/F5-TTS.git
-   cd F5-TTS
+   git clone https://github.com/DinhIchMinhHoang/colab-fine-tuning.git
+   cd colab-fine-tuning
    pip install -e .
    ```
 
@@ -42,17 +43,19 @@ F5-TTS-official/
 
 1. **Include your Vietnamese dataset in the repository:**
    ```
-   F5-TTS/
-   └── data/
-       └── vietnamese_char/
-           ├── wavs/          # Audio files
-           └── sample.csv     # Metadata file
+   colab-fine-tuning/
+   ├── data/vietnamese_char/
+   │   ├── wavs/          # Audio files
+   │   └── sample.csv     # Metadata file
+   ├── notebooks/
+   │   └── colab_training.ipynb
+   └── README_COLAB_WORKFLOW.md
    ```
 
 2. **Push everything to GitHub:**
    ```bash
-   git add data/vietnamese_char/
-   git commit -m "Add Vietnamese training dataset"
+   git add data/vietnamese_char/ notebooks/ README_COLAB_WORKFLOW.md
+   git commit -m "Add Vietnamese training dataset and Colab notebook"
    git push origin main
    ```
 
@@ -100,8 +103,7 @@ git push origin main
 
 ### Colab:
 ```python
-# Update code from GitHub
-%cd F5-TTS
+# Update code from GitHub (run in working directory)
 !git pull origin main
 !pip install -e . --force-reinstall
 
