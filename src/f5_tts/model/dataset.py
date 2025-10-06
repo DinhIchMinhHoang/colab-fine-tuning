@@ -141,6 +141,7 @@ class CustomDataset(Dataset):
         if self.preprocessed_mel:
             mel_spec = torch.tensor(row["mel_spec"])
         else:
+            print("Loading audio file:", audio_path)
             audio, source_sample_rate = torchaudio.load(audio_path)
 
             # make sure mono input
